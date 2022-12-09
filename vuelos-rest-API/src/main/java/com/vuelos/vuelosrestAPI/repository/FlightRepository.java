@@ -9,9 +9,9 @@ import com.vuelos.vuelosrestAPI.entity.Flight;
 
 public interface FlightRepository extends JpaRepository<Flight, String>{
 	
-	@Query(value = "SELECT F.FLIGHT_AIRLINECODE_PK, F.FLIGHTNUMBER_PK "
-					+ "FROM FLIGHT F, AIRLINE A "
-					+ "WHERE F.FLIGHT_AIRLINECODE_PK = :aerolinea", nativeQuery = true)
+	@Query(value = "SELECT FLIGHT_AIRLINECODE_PK, FLIGHTNUMBER_PK "
+					+ "FROM FLIGHT "
+					+ "WHERE FLIGHT_AIRLINECODE_PK = :aerolinea", nativeQuery = true)
 	List<Flight> getVuelosFromAerolinea(String aerolinea);
 	
 }
