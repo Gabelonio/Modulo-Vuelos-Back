@@ -1,0 +1,78 @@
+http://localhost:8089/api/v1/aerolineas/getAerolineas
+
+
+http://localhost:8089/api/v1/aeropuertos/getAeropuertos
+
+
+http://localhost:8089/api/v1/vuelos/getVuelosFromAerolinea
+
+
+PETICIONES DE VUELO-------------------------------------------------------------------------------------------------------------------------
+
+Peticion get, que trae todos los registros de la tabla Flight
+http://localhost:8089/api/v1/vuelos/getVuelos
+Peticion get, que trae todos los registros de la tabla Flight que pertenezcan a una aerolinea especifica
+http://localhost:8089/api/v1/vuelos/getVuelosFromAerolinea
+
+
+Peticion post, que guarda un nuevo registro en la tabla Flight.
+http://localhost:8089/api/v1/vuelos/setVuelo
+
+--------------------------------------------------------------------------------------------------------------
+
+PETICIONES SEGMENTO DE VUELO------------------------------------------------------------------------------------
+
+Petición get que trae todos los segmentos de vuelo en FlightSegment
+http://localhost:8089/api/v1/segmentosVuelos/getSegmentosVuelos
+
+Peticion get, que trar de la tablas FlightSegment, los segmentos especifico para un vuelo dado.
+http://localhost:8089/api/v1/segmentosVuelos/getSegmentosVuelo
+
+Peticion post, que guarda un nuevo registro en la tabla FlightSegment, es decir un segmento de un vuelo.
+http://localhost:8089/api/v1/segmentosVuelos/setSegmentoVuelo
+
+-----------------------------------------------------------------------------------------------------
+
+
+PETICIONES DE ASIGNACION DE PILOTO------------------------------------------------------------------
+Petición get que trae todos los pilotos asignados
+http://localhost:8089/api/v1/pilotosAsignados/getPilotosAsignados
+
+peticion post que guarda un registo de un nuevo piloto asignado a un segmento de vuelo
+http://localhost:8089/api/v1/pilotosAsignados/setAsignarPiloto
+
+-----------------------------------------------------------------------------------------------------
+
+PETICIONES DE PILOTO------------------------------------------------------------------------------------------------------------------------------------
+
+Petición get que trae los campos de la tabla Piloto, más una columna de NAME en nulls.
+http://localhost:8089/api/v1/pilotos/getPilotos
+
+Peticion get que trae los registros de la tabla Piloto que sean de una Aerolinea especifica, tabla piloto más una columna con el nombre del piloto.
+http://localhost:8089/api/v1/pilotos/getPilotosFromAerolinea
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

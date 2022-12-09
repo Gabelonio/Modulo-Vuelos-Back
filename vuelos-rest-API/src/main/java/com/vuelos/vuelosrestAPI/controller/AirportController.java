@@ -14,8 +14,6 @@ import com.vuelos.vuelosrestAPI.entity.Airport;
 import com.vuelos.vuelosrestAPI.repository.AirportRepository;
 
 
-//ESTE VA DE QUINTAS, Luego de ArilineServiceImpl
-
 @RestController
 @RequestMapping("api/v1/aeropuertos")
 @CrossOrigin(origins = "*")
@@ -35,19 +33,5 @@ public class AirportController {
 		return repositorio.getAeropuertosFromVuelo(vuelo);
 	}
 	
-	
-	/*
-	private AirportService airportService;
-	
-	public AirportController (AirportService airportService) {
-		super();
-		this.airportService = airportService;
-	}
-	
-	@GetMapping("/getAeropuertos")
-	public ResponseEntity<List<Airport>> getAerolineas(){
-		return ResponseEntity.ok(airportService.getAeropuertos());
-	}
-	*/
 
 }
