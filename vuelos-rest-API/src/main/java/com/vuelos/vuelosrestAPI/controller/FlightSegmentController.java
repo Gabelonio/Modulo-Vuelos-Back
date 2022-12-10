@@ -36,6 +36,10 @@ public class FlightSegmentController {
 		return repositorio.getSegmentosVuelo(aerolinea, numeroVuelo);
 	}
 	
+	@PostMapping("/setSegmentoVuelo")
+	public FlightSegment setFlightSegment (@RequestBody FlightSegment flightSegment) {
+		return repositorio.save(flightSegment);
+	}
 
 	/*
 	//Para testear con el backend
@@ -45,9 +49,6 @@ public class FlightSegmentController {
 	}
 	*/
 	
-	@PostMapping("/setSegmentoVuelo")
-	public FlightSegment setFlightSegment (@RequestBody FlightSegment flightSegment) {
-		return repositorio.save(flightSegment);
-	}
+
 	
 }

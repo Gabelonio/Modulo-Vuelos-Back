@@ -11,33 +11,93 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "FLIGHTSEGMENT")
+@IdClass(FlightSegmentLlaveCompuesta.class)
 public class FlightSegment {
 	
-	@EmbeddedId
-	private FlightSegmentPK flighSegmentPK;
-	
-	/*
 	@Id
 	@Column (name = "FLIGHTSEGMENT_AIRLINECODE_PK")
-	private String airlinecode_PK;
+	private String flightsegmentAirlinecodePk;
 	@Id
 	@Column (name = "FLIGHTSEGMENT_FLIGHTNUMBER_PK")
-	private String flightnumber_PK;
+	private String flightsegmentFlightnumberPk;
 	@Id
 	@Column (name = "FLIGHTSEGMENT_AIRPORTCODE_PK")
-	private String origen_airportcode_FK;
-	*/
+	private String flightsegmentAirportcodePk;
+	
 	@Column (name = "FS_AIR_AIRPORTCODE_PK")
-	private String destino_airportcode_FK;
+	private String fsAirAirportcodePk;
 	@Column (name = "FLIGHTSEGMENT_FECHAVUELO", nullable = true)
-	private Date fechaVuelo;
+	private Date flightsegmentFechavuelo;
 	@Column (name = "FLIGHTSEGMENT_DURACION")
-	private Integer duracionSegmento;
+	private Integer flightsegmentDuracion;
 	
 	public FlightSegment () {
 		
 	}
 
+	public FlightSegment(String flightsegmentAirlinecodePk, String flightsegmentFlightnumberPk,
+			String flightsegmentAirportcodePk, String fsAirAirportcodePk, Date flightsegmentFechavuelo,
+			Integer flightsegmentDuracion) {
+		super();
+		this.flightsegmentAirlinecodePk = flightsegmentAirlinecodePk;
+		this.flightsegmentFlightnumberPk = flightsegmentFlightnumberPk;
+		this.flightsegmentAirportcodePk = flightsegmentAirportcodePk;
+		this.fsAirAirportcodePk = fsAirAirportcodePk;
+		this.flightsegmentFechavuelo = flightsegmentFechavuelo;
+		this.flightsegmentDuracion = flightsegmentDuracion;
+	}
+
+	public String getFlightsegmentAirlinecodePk() {
+		return flightsegmentAirlinecodePk;
+	}
+
+	public void setFlightsegmentAirlinecodePk(String flightsegmentAirlinecodePk) {
+		this.flightsegmentAirlinecodePk = flightsegmentAirlinecodePk;
+	}
+
+	public String getFlightsegmentFlightnumberPk() {
+		return flightsegmentFlightnumberPk;
+	}
+
+	public void setFlightsegmentFlightnumberPk(String flightsegmentFlightnumberPk) {
+		this.flightsegmentFlightnumberPk = flightsegmentFlightnumberPk;
+	}
+
+	public String getFlightsegmentAirportcodePk() {
+		return flightsegmentAirportcodePk;
+	}
+
+	public void setFlightsegmentAirportcodePk(String flightsegmentAirportcodePk) {
+		this.flightsegmentAirportcodePk = flightsegmentAirportcodePk;
+	}
+
+	public String getFsAirAirportcodePk() {
+		return fsAirAirportcodePk;
+	}
+
+	public void setFsAirAirportcodePk(String fsAirAirportcodePk) {
+		this.fsAirAirportcodePk = fsAirAirportcodePk;
+	}
+
+	public Date getFlightsegmentFechavuelo() {
+		return flightsegmentFechavuelo;
+	}
+
+	public void setFlightsegmentFechavuelo(Date flightsegmentFechavuelo) {
+		this.flightsegmentFechavuelo = flightsegmentFechavuelo;
+	}
+
+	public Integer getFlightsegmentDuracion() {
+		return flightsegmentDuracion;
+	}
+
+	public void setFlightsegmentDuracion(Integer flightsegmentDuracion) {
+		this.flightsegmentDuracion = flightsegmentDuracion;
+	}
+
+
+	
+/*
 	public FlightSegment(FlightSegmentPK flighSegmentPK, String destino_airportcode_FK, Date fechaVuelo,
 			Integer duracionSegmento) {
 		super();
@@ -77,7 +137,7 @@ public class FlightSegment {
 
 	public void setDuracionSegmento(Integer duracionSegmento) {
 		this.duracionSegmento = duracionSegmento;
-	}
+	}*/
 
 	
 	

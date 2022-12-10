@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.vuelos.vuelosrestAPI.entity.Flight;
+import com.vuelos.vuelosrestAPI.entity.FlightLlaveCompuesta;
 
-public interface FlightRepository extends JpaRepository<Flight, String>{
+public interface FlightRepository extends JpaRepository<Flight, FlightLlaveCompuesta>{
 	
 
 	@Query(value = "SELECT FLIGHT_AIRLINECODE_PK, FLIGHTNUMBER_PK "

@@ -7,7 +7,7 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 class FlightSegmentPK implements Serializable {
 	
-	private String FLIGHTSEGMENT_AIRLINECODE_PK;
+	/*private String FLIGHTSEGMENT_AIRLINECODE_PK;
 	private String FLIGHTSEGMENT_FLIGHTNUMBER_PK;
 	private String FLIGHTSEGMENT_AIRPORTCODE_PK;
 	
@@ -46,7 +46,7 @@ class FlightSegmentPK implements Serializable {
 	public void setFLIGHTSEGMENT_AIRPORTCODE_PK(String fLIGHTSEGMENT_AIRPORTCODE_PK) {
 		FLIGHTSEGMENT_AIRPORTCODE_PK = fLIGHTSEGMENT_AIRPORTCODE_PK;
 	}
-	
+	*/
 	
 	
 	

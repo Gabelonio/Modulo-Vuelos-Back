@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.vuelos.vuelosrestAPI.entity.FlightSegment;
+import com.vuelos.vuelosrestAPI.entity.FlightSegmentLlaveCompuesta;
 
 
-public interface FlightSegmentRepository extends JpaRepository<FlightSegment, String> {
+public interface FlightSegmentRepository extends JpaRepository<FlightSegment, FlightSegmentLlaveCompuesta> {
 	
 	@Query(value = "SELECT * FROM FLIGHTSEGMENT", nativeQuery = true)
 	List<FlightSegment> getSegmentosVuelos();

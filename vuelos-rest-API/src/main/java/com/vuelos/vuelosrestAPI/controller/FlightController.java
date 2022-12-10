@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,11 +32,16 @@ public class FlightController {
 		return repositorio.getVuelos();
 	}
 	
-	
 	//Para conectar con el frontend
 	@GetMapping("/getVuelosFromAerolinea")
 	public List<Flight> getAerolineas(@RequestParam("aerolinea") String aerolinea){
 		return repositorio.getVuelosFromAerolinea(aerolinea);
+	}
+	
+	/*@PostMapping("/setVuelo")*/
+	@RequestMapping(value = "/setVuelo", produces = "application/json", method=RequestMethod.POST)
+	public Flight setFlight (@RequestBody Flight flight) {
+		return repositorio.save(flight);
 	}
 	
 	/*
@@ -46,8 +52,5 @@ public class FlightController {
 	}
 	*/
 	
-	@PostMapping ("/setVuelo")
-	public Flight setFlight (@RequestBody Flight flight) {
-		return repositorio.save(flight);
-	}
+
 }
