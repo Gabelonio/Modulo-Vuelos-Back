@@ -37,7 +37,7 @@ public class AirportController {
 	
 	//Para conectar con el front
 	@GetMapping("/getAeropuertoDestinoFromSegmentosDeVuelo")
-	public List <Airport> getAeropuertoDestinoFromSegmentosDeVuelo (@RequestParam("aerolinea") String aerolinea, @RequestParam("numeroVuelo") String numeroVuelo, @RequestParam("aeropuertoOrigen") String aeropuertoOrigen){
+	public List <String> getAeropuertoDestinoFromSegmentosDeVuelo (@RequestParam("aerolinea") String aerolinea, @RequestParam("numeroVuelo") String numeroVuelo, @RequestParam("aeropuertoOrigen") String aeropuertoOrigen){
 		return repositorio.getAeropuertoDestinoFromSegmentosDeVuelo(aerolinea, numeroVuelo, aeropuertoOrigen);
 	}
 		
