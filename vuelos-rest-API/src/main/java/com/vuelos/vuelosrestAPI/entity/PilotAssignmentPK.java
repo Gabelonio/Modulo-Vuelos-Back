@@ -6,7 +6,7 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 class PilotAssignmentPK implements Serializable{
-	
+	/*
 	private String PILOTASSIGNMENT_AIRLINECODE_PK;
 	private String PA_FLIGHTNUMBER_PK;
 	private String AIRPORTCODE_PK;
@@ -56,7 +56,7 @@ class PilotAssignmentPK implements Serializable{
 	public void setPA_PILOTLICENSE_PK(String pA_PILOTLICENSE_PK) {
 		PA_PILOTLICENSE_PK = pA_PILOTLICENSE_PK;
 	}
-	
+	*/
 	
 	
 }
