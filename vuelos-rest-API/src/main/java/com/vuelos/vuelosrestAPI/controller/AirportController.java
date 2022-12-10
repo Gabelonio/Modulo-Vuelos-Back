@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,18 @@ public class AirportController {
 		return repositorio.getAeropuertosFromVuelo(vuelo, aeropuertos);
 	}
 	
+	//Para conectar con el front
+	@GetMapping("/getAeropuertoDestinoFromSegmentosDeVuelo")
+	public List <Airport> getAeropuertoDestinoFromSegmentosDeVuelo (@RequestParam("aerolinea") String aerolinea, @RequestParam("numeroVuelo") String numeroVuelo, @RequestParam("aeropuertoOrigen") String aeropuertoOrigen){
+		return repositorio.getAeropuertoDestinoFromSegmentosDeVuelo(aerolinea, numeroVuelo, aeropuertoOrigen);
+	}
+		
+	/*
+	//Para testear en el backend
+	@GetMapping("/getAeropuertoDestinoFromSegmentosDeVuelo/{aerolinea}/{numeroVuelo}/{aeropuertoOrigen}")
+	public List <Airport> getAeropuertoDestinoFromSegmentosDeVuelo (@PathVariable String aerolinea, @PathVariable  String numeroVuelo, @PathVariable String aeropuertoOrigen){
+		return repositorio.getAeropuertoDestinoFromSegmentosDeVuelo(aerolinea, numeroVuelo, aeropuertoOrigen);
+	}
+	*/
 
 }

@@ -23,4 +23,12 @@ public interface AirportRepository extends JpaRepository <Airport, String>{
 			nativeQuery = true)
 	List<Airport> getAeropuertosFromVuelo(String vuelo, List<String> aeropuertos);
 	
+	@Query ( value = "SELECT A.*"
+			+" FROM AIRPORT A"
+			+" WHERE A.AIRPORT_AIRPORTCODE_PK = (SELECT FS.FS_AIR_AIRPORTCODE_PK"
+			+" FROM FLIGHTSEGMENT FS"
+			+" WHERE FS.FLIGHTSEGMENT_AIRLINECODE_PK = :aerolinea AND FS.FLIGHTSEGMENT_FLIGHTNUMBER_PK = :numeroVuelo AND FLIGHTSEGMENT_AIRPORTCODE_PK = :aeropuertoOrigen)"
+			,nativeQuery = true)
+	List<Airport> getAeropuertoDestinoFromSegmentosDeVuelo(String aerolinea, String numeroVuelo, String aeropuertoOrigen);
+	
 }

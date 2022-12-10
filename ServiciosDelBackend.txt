@@ -1,11 +1,15 @@
 http://localhost:8089/api/v1/aerolineas/getAerolineas
 
 
+PETICIONES DE AEROPUERTOS-------------------------------------------------------------------------------------------------------------------------
+Petición que trae la tabla de aeropuertos
 http://localhost:8089/api/v1/aeropuertos/getAeropuertos
-
-
-http://localhost:8089/api/v1/vuelos/getVuelosFromAerolinea
-
+Petición get que trae los aeropuertos de vuelos (?), no sé muy bien, no hice esta petición
+http://localhost:8089/api/v1/aeropuertos/getAeropuertosFromVuelo
+Petición get que trae el registro en la tabla aeropuertos del aeropuerto destino que está en el registro de flighsement con los paramentros
+de aerolinea, numeroVuelo y aeropuertoOrigen
+http://localhost:8089/api/v1/aeropuertos/getAeropuertoDestinoFromSegmentosDeVuelo
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 PETICIONES DE VUELO-------------------------------------------------------------------------------------------------------------------------
 
