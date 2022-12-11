@@ -2,6 +2,7 @@ package com.vuelos.vuelosrestAPI.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.vuelos.vuelosrestAPI.entity.Airline;
-import com.vuelos.vuelosrestAPI.service.AirlineService;
+import com.vuelos.vuelosrestAPI.repository.AirlineRepository;
+
 
 //ESTE VA DE QUINTAS, Luego de ArilineServiceImpl
 
@@ -18,15 +20,11 @@ import com.vuelos.vuelosrestAPI.service.AirlineService;
 @CrossOrigin(origins = "*")
 public class AirlineController {
 	
-	private AirlineService airlineService;
-
-	public AirlineController(AirlineService airlineService) {
-		super();
-		this.airlineService = airlineService;
-	} 
+	@Autowired
+	private AirlineRepository repositorio;
 	
 	@GetMapping("/getAerolineas")
-	public ResponseEntity<List<Airline>> getAerolineas(){
-		return ResponseEntity.ok(airlineService.getAerolineas());
+	public List<Airline> getAerolineas(){
+		return repositorio.getAerolineas();
 	}
 }

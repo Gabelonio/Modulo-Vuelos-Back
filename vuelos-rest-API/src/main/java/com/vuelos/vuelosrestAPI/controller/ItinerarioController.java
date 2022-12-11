@@ -18,6 +18,7 @@ import com.vuelos.vuelosrestAPI.entity.Flight;
 import com.vuelos.vuelosrestAPI.entity.FlightSegment;
 import com.vuelos.vuelosrestAPI.entity.Itinerario;
 import com.vuelos.vuelosrestAPI.entity.Place;
+import com.vuelos.vuelosrestAPI.entity.SegmentoItinerario;
 import com.vuelos.vuelosrestAPI.repository.AirlineRepository;
 import com.vuelos.vuelosrestAPI.repository.AirportRepository;
 import com.vuelos.vuelosrestAPI.repository.ConexionRepository;
@@ -39,6 +40,7 @@ public class ItinerarioController {
 	@Autowired
 	private FlightSegmentRepository repositorioSegmentosDeVuelo;
 	List<FlightSegment> segmentosDeVuelos;
+	List<FlightSegment> segmentosDeVuelo;
 	@Autowired
 	private ConexionRepository repositorioConexion;
 	List<Conexion> conexiones;
@@ -50,7 +52,8 @@ public class ItinerarioController {
 	List<Place> lugares;
 	
 	private List<Itinerario> itinerarios;
-	
+	List<SegmentoItinerario> itinerario;
+	SegmentoItinerario segmento;
 	/*
 	@GetMapping ("/getItinerarios")
 	public List<Itinerario> getItinerarios(@RequestParam("aeropuertoOrigen")String aeropuertoOrigen, @RequestParam("aeropuertoDestino")String aeropuertoDestino, @RequestParam("fechaOrigen") Date fechaOrigen){
@@ -64,12 +67,63 @@ public class ItinerarioController {
 	
 	//Para testear con el backend
 	@GetMapping ("/getItinerarios/{aeropuertoOrigen}/{aeropuertoDestino}/{fechaOrigen}")
-	public List<Itinerario> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable Date fechaOrigen){
+	public List<Itinerario> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable String fechaOrigen){
 		
 		initRepositorios();
-		//Ir llenando itinerarios, primero por vuelos directos, y después mediante por conexiones si hay.
+
 		
+		//Ir llenando itinerarios, primero por vuelos directos, y después mediante por conexiones si hay.
+		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
+	}
+
+	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, String fechaOrigen) {
+		int contador = 0;
+		for (int i = 0; i < segmentosDeVuelos.size();i++) {
+			
+			if (segmentosDeVuelos.get(i).getFlightsegmentAirportcodePk().equals(aeropuertoOrigen)) {
+				
+				segmentosDeVuelo = repositorioSegmentosDeVuelo.getSegmentosVuelo(segmentosDeVuelos.get(i).getFlightsegmentAirlinecodePk(), segmentosDeVuelos.get(i).getFlightsegmentFlightnumberPk());
+				
+				
+				for(int f = contador; f < segmentosDeVuelo.size();f++) {
+					
+					itinerario.add(crearSegmentoItinerario(segmentosDeVuelo.get(f)));
+					
+					if (contador <= f && segmentosDeVuelo.get(f).getFsAirAirportcodePk().equals(aeropuertoDestino)) {
+						itinerarios.add(new Itinerario(itinerario));
+					}
+				}
+				itinerario.clear();
+				contador = 0;
+			}
+			contador++;
+		}
+	}
+
+	private SegmentoItinerario crearSegmentoItinerario(FlightSegment segVuelo) {
+		
+		segmento = new SegmentoItinerario();
+		String idAeropuerto = segVuelo.getFlightsegmentAirportcodePk();
+		String idPlace = repositorioAeropuerto.getIdPlaceFromIdAeropuerto(idAeropuerto)+"";
+		segmento.setVueloOrigen("Vuelo: "+segVuelo.getFlightsegmentAirlinecodePk()+segVuelo.getFlightsegmentFlightnumberPk());
+		segmento.setAeropuertoOrigen("Aeropuerto: "+ repositorioAeropuerto.getNomAeropuertoFromIdAeropuerto(idAeropuerto));		
+		segmento.setCiudadOrigen("Ciudad: "+repositorioPlace.getNomPlaceFromAeropuerto(idPlace));
+		segmento.setDivisionOrigen(repositorioPlace.getTypePlaceDFromPlaceC(idPlace)+": "+repositorioPlace.getNomPlaceDFromPlaceC(idPlace));
+		segmento.setPaisOrigen("Pais: "+repositorioPlace.getNomPlacePFromPlaceC(idPlace));
+		segmento.setFechaOrigen(segVuelo.getFlightsegmentFechavuelo());
+		segmento.setHoraOrigen("Hora: "+segVuelo.getFlightsegmentDuracion());
+		
+		idAeropuerto = segVuelo.getFsAirAirportcodePk();
+		idPlace = repositorioAeropuerto.getIdPlaceFromIdAeropuerto(idAeropuerto)+"";
+		segmento.setVueloDestino("Vuelo: "+segVuelo.getFlightsegmentAirlinecodePk()+segVuelo.getFlightsegmentFlightnumberPk());
+		segmento.setAeropuertoDestino("Aeropuerto: "+ repositorioAeropuerto.getNomAeropuertoFromIdAeropuerto(idAeropuerto));		
+		segmento.setCiudadDestino("Ciudad: "+repositorioPlace.getNomPlaceFromAeropuerto(idPlace));
+		segmento.setDivisionDestino(repositorioPlace.getTypePlaceDFromPlaceC(idPlace)+": "+repositorioPlace.getNomPlaceDFromPlaceC(idPlace));
+		segmento.setPaisDestino("Pais: "+repositorioPlace.getNomPlacePFromPlaceC(idPlace));
+		segmento.setFechaDestino(segVuelo.getFlightsegmentFechavuelo());
+		segmento.setHoraDestino("Hora: "+segVuelo.getFlightsegmentDuracion());
+		return segmento;
 	}
 
 	private void initRepositorios() {
