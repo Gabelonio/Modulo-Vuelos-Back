@@ -1,6 +1,7 @@
 package com.vuelos.vuelosrestAPI.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,23 +52,15 @@ public class ItinerarioController {
 	private PlaceRepository repositorioPlace;
 	List<Place> lugares;
 	
-	private List<Itinerario> itinerarios;
-	List<SegmentoItinerario> itinerario;
+	private List<Itinerario> itinerarios = new ArrayList<Itinerario>();
+	List<SegmentoItinerario> itinerario = new ArrayList<SegmentoItinerario>();
 	SegmentoItinerario segmento;
-	/*
+	
 	@GetMapping ("/getItinerarios")
 	public List<Itinerario> getItinerarios(@RequestParam("aeropuertoOrigen")String aeropuertoOrigen, @RequestParam("aeropuertoDestino")String aeropuertoDestino, @RequestParam("fechaOrigen") Date fechaOrigen){
 		
-		
-		
-		
-		return itinerarios;
-	}
-	*/
-	
-	//Para testear con el backend
-	@GetMapping ("/getItinerarios/{aeropuertoOrigen}/{aeropuertoDestino}/{fechaOrigen}")
-	public List<Itinerario> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable String fechaOrigen){
+		itinerarios.clear();
+		itinerario.clear();
 		
 		initRepositorios();
 
@@ -76,15 +69,52 @@ public class ItinerarioController {
 		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
 	}
+	
+	/*
+	//Para testear con el backend
+	@GetMapping ("/getItinerarios/{aeropuertoOrigen}/{aeropuertoDestino}/{fechaOrigen}")
+	public List<Itinerario> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable String fechaOrigen){
+		itinerarios.clear();
+		itinerario.clear();
+		
+		initRepositorios();
 
-	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, String fechaOrigen) {
+		
+		//Ir llenando itinerarios, primero por vuelos directos, y después mediante por conexiones si hay.
+		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
+		return itinerarios;
+	}
+	*/
+	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, Date fechaOrigen) {
+		
+		for (int v = 0; v < vuelos.size();v++) {
+			int contador = 0;
+			segmentosDeVuelo = repositorioSegmentosDeVuelo.getSegmentosVuelo( vuelos.get(v).getFlightAirlinecodePk(), vuelos.get(v).getFlightnumberPk());
+			for (int i = 0; i < segmentosDeVuelo.size();i++) {
+				if (segmentosDeVuelo.get(i).getFlightsegmentAirportcodePk().equals(aeropuertoOrigen)) {
+					
+					for(int f = contador; f < segmentosDeVuelo.size();f++) {
+						
+						itinerario.add(crearSegmentoItinerario(segmentosDeVuelo.get(f)));
+						
+						if (contador <= f && segmentosDeVuelo.get(f).getFsAirAirportcodePk().equals(aeropuertoDestino)) {
+							itinerarios.add(new Itinerario(itinerario));
+						}
+					}
+					
+					itinerario.clear();
+				}
+				contador++;
+			}
+		}
+		
+		/*
 		int contador = 0;
 		for (int i = 0; i < segmentosDeVuelos.size();i++) {
 			
 			if (segmentosDeVuelos.get(i).getFlightsegmentAirportcodePk().equals(aeropuertoOrigen)) {
 				
 				segmentosDeVuelo = repositorioSegmentosDeVuelo.getSegmentosVuelo(segmentosDeVuelos.get(i).getFlightsegmentAirlinecodePk(), segmentosDeVuelos.get(i).getFlightsegmentFlightnumberPk());
-				
 				
 				for(int f = contador; f < segmentosDeVuelo.size();f++) {
 					
@@ -99,6 +129,7 @@ public class ItinerarioController {
 			}
 			contador++;
 		}
+		*/
 	}
 
 	private SegmentoItinerario crearSegmentoItinerario(FlightSegment segVuelo) {

@@ -1,4 +1,4 @@
-http://localhost:8089/api/v1/aerolineas/getAerolineas
+﻿http://localhost:8089/api/v1/aerolineas/getAerolineas
 
 
 PETICIONES DE AEROPUERTOS-------------------------------------------------------------------------------------------------------------------------
@@ -57,10 +57,12 @@ http://localhost:8089/api/v1/pilotos/getPilotosFromAerolinea
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
+PETICIONES DE ITINERARIOS ---------------------------------------------------------------------------------
+Petición get que mediante los id de aerolineOrigen, aerolineaDestino y Fecha, devuelve los itinerarios
+disponibles
+http://localhost:8089/api/v1/itinerario/getItinerarios
 
-
-
-
+------------------------------------------------------------------------------------------------------------
 
 
 
