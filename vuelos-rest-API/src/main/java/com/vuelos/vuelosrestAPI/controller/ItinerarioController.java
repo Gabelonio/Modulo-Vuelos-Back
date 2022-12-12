@@ -58,7 +58,7 @@ public class ItinerarioController {
 	SegmentoItinerario segmento;
 	@Autowired
 	private Gson gson;
-	
+	/*
 	@GetMapping ("/getItinerarios")
 	public List<String> getItinerarios(@RequestParam("aeropuertoOrigen")String aeropuertoOrigen, @RequestParam("aeropuertoDestino")String aeropuertoDestino, @RequestParam("fechaOrigen") Date fechaOrigen){
 		
@@ -72,8 +72,8 @@ public class ItinerarioController {
 		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
 	}
-	
-	/*
+	*/
+
 	//Para testear con el backend
 	@GetMapping ("/getItinerarios/{aeropuertoOrigen}/{aeropuertoDestino}/{fechaOrigen}")
 	public List<String> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable String fechaOrigen){
@@ -87,8 +87,8 @@ public class ItinerarioController {
 		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
 	}
-	*/
-	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, Date fechaOrigen) {
+	
+	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, String fechaOrigen) {
 		
 		for (int v = 0; v < vuelos.size();v++) {
 			int contador = 0;
@@ -143,9 +143,9 @@ public class ItinerarioController {
 		String idPlace = repositorioAeropuerto.getIdPlaceFromIdAeropuerto(idAeropuerto)+"";
 		segmento.setVueloOrigen("Vuelo: "+segVuelo.getFlightsegmentAirlinecodePk()+segVuelo.getFlightsegmentFlightnumberPk());
 		segmento.setAeropuertoOrigen("Aeropuerto: "+ repositorioAeropuerto.getNomAeropuertoFromIdAeropuerto(idAeropuerto));		
-		segmento.setCiudadOrigen("Ciudad: "+repositorioPlace.getNomPlaceFromAeropuerto(idPlace));
-		segmento.setDivisionOrigen(repositorioPlace.getTypePlaceDFromPlaceC(idPlace)+": "+repositorioPlace.getNomPlaceDFromPlaceC(idPlace));
-		segmento.setPaisOrigen("Pais: "+repositorioPlace.getNomPlacePFromPlaceC(idPlace));
+		segmento.setCiudadOrigen("Ciudad: "+gson.toJson(repositorioPlace.getNomPlaceFromAeropuerto(idPlace)));
+		segmento.setDivisionOrigen(gson.toJson(repositorioPlace.getTypePlaceDFromPlaceC(idPlace))+": "+gson.toJson(repositorioPlace.getNomPlaceDFromPlaceC(idPlace)));
+		segmento.setPaisOrigen("Pais: "+gson.toJson(repositorioPlace.getNomPlacePFromPlaceC(idPlace)));
 		segmento.setFechaOrigen(segVuelo.getFlightsegmentFechavuelo());
 		segmento.setHoraOrigen("Hora: "+segVuelo.getFlightsegmentDuracion());
 		
@@ -153,9 +153,9 @@ public class ItinerarioController {
 		idPlace = repositorioAeropuerto.getIdPlaceFromIdAeropuerto(idAeropuerto)+"";
 		segmento.setVueloDestino("Vuelo: "+segVuelo.getFlightsegmentAirlinecodePk()+segVuelo.getFlightsegmentFlightnumberPk());
 		segmento.setAeropuertoDestino("Aeropuerto: "+ repositorioAeropuerto.getNomAeropuertoFromIdAeropuerto(idAeropuerto));		
-		segmento.setCiudadDestino("Ciudad: "+repositorioPlace.getNomPlaceFromAeropuerto(idPlace));
-		segmento.setDivisionDestino(repositorioPlace.getTypePlaceDFromPlaceC(idPlace)+": "+repositorioPlace.getNomPlaceDFromPlaceC(idPlace));
-		segmento.setPaisDestino("Pais: "+repositorioPlace.getNomPlacePFromPlaceC(idPlace));
+		segmento.setCiudadDestino("Ciudad: "+gson.toJson(repositorioPlace.getNomPlaceFromAeropuerto(idPlace)));
+		segmento.setDivisionDestino(gson.toJson(repositorioPlace.getTypePlaceDFromPlaceC(idPlace))+": "+gson.toJson(repositorioPlace.getNomPlaceDFromPlaceC(idPlace)));
+		segmento.setPaisDestino("Pais: "+gson.toJson(repositorioPlace.getNomPlacePFromPlaceC(idPlace)));
 		segmento.setFechaDestino(segVuelo.getFlightsegmentFechavuelo());
 		segmento.setHoraDestino("Hora: "+segVuelo.getFlightsegmentDuracion());
 		return segmento;
