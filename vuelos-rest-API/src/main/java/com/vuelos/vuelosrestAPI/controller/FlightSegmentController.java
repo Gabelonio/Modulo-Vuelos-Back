@@ -29,12 +29,13 @@ public class FlightSegmentController {
 		return repositorio.getSegmentosVuelos();
 	}
 	
-
 	//Para conectar con el frontend
 	@GetMapping("/getSegmentosVuelo")
 	public List<FlightSegment> getSegmentosVuelo (@RequestParam("aerolinea") String aerolinea, @RequestParam("numeroVuelo") String numeroVuelo){
 		return repositorio.getSegmentosVuelo(aerolinea, numeroVuelo);
 	}
+	
+	
 	
 	@PostMapping("/setSegmentoVuelo")
 	public FlightSegment setFlightSegment (@RequestBody FlightSegment flightSegment) {
