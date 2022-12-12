@@ -58,9 +58,9 @@ public class ItinerarioController {
 	SegmentoItinerario segmento;
 	@Autowired
 	private Gson gson;
-	/*
+	
 	@GetMapping ("/getItinerarios")
-	public List<Itinerario> getItinerarios(@RequestParam("aeropuertoOrigen")String aeropuertoOrigen, @RequestParam("aeropuertoDestino")String aeropuertoDestino, @RequestParam("fechaOrigen") Date fechaOrigen){
+	public List<String> getItinerarios(@RequestParam("aeropuertoOrigen")String aeropuertoOrigen, @RequestParam("aeropuertoDestino")String aeropuertoDestino, @RequestParam("fechaOrigen") Date fechaOrigen){
 		
 		itinerarios.clear();
 		itinerario.clear();
@@ -72,8 +72,8 @@ public class ItinerarioController {
 		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
 	}
-	*/
 	
+	/*
 	//Para testear con el backend
 	@GetMapping ("/getItinerarios/{aeropuertoOrigen}/{aeropuertoDestino}/{fechaOrigen}")
 	public List<String> getItinerarios(@PathVariable String aeropuertoOrigen,@PathVariable String aeropuertoDestino,@PathVariable String fechaOrigen){
@@ -87,8 +87,8 @@ public class ItinerarioController {
 		llenarItineraVuelosDirectos(aeropuertoOrigen, aeropuertoDestino, fechaOrigen);
 		return itinerarios;
 	}
-	
-	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, String fechaOrigen) {
+	*/
+	private void llenarItineraVuelosDirectos(String aeropuertoOrigen, String aeropuertoDestino, Date fechaOrigen) {
 		
 		for (int v = 0; v < vuelos.size();v++) {
 			int contador = 0;
